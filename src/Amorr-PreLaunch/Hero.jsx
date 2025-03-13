@@ -115,7 +115,7 @@ const Hero = () => {
       />
       <div
         ref={textRef}
-        className="absolute top-[70%] left-[41%] text-center text-[0.4rem] opacity-0  transform -translate-x-1/2 -translate-y-1/2">
+        className="absolute top-[70%] left-[41%] text-center text-black text-[0.4rem] opacity-0  transform -translate-x-1/2 -translate-y-1/2">
         <p className="text-[5em] tracking-[10px]">AMORR</p>
         <p className="text-[0.5em]">Challenges Engage Efforts Futre</p>
       </div>

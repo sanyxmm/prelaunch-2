@@ -49,7 +49,7 @@ const Together = () => {
   }, []);
 
   return (
-    <div className="overflow-x-hidden z-20">
+    <div className="overflow-hidden z-20">
         {/* empty */}
       <div className='bg-[#F8A39C] h-[30vh] w-full overflow-x-hidden z-20'></div>
       {/* //couple */}
