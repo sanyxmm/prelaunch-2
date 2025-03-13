@@ -19,6 +19,12 @@ const Hero = () => {
   const rockRef1 = useRef(null);
   const rockRef2 = useRef(null);
   const mm = gsap.matchMedia();
+  const [animate, setAnimate] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setAnimate(true), 100); // Small delay to trigger animation
+    return () => clearTimeout(timeout);
+  }, []);
 
   useEffect(() => {
     // Access window safely inside useEffect
@@ -43,15 +49,6 @@ const Hero = () => {
       duration: 2,
       height: "116vh",
       width: "35%"
-    });
-
-    gsap.to(textRef.current, {
-      top: "37%", // Move to vertical center
-      left: "50%", // Move to horizontal center
-      duration: 2,
-      fontSize: "2.5vw",
-      opacity: 1,
-      ease: "power2.out"
     });
 
     mm.add("(min-width: 1300px)", () => {
@@ -98,10 +95,12 @@ const Hero = () => {
         alt="Right Tree"
         className="absolute top-0 right-0 w-[30%]  h-[100vh]"
       />
-      <Image ref={coupleRef}
+      <Image 
         src={couple}
         alt="Couple"
-        className="absolute bottom-[-10vw] left-1/2  w-[18vw] z-10 transform -translate-x-1/2 -translate-y-0"
+        className={`absolute bottom-[-10vw] left-[40%] w-[18vw] z-10 transform  -translate-y-0  transition-all duration-[2500ms]  ease-out ${
+          animate ? "bottom-[0%] left-[40%] w-[20vw] " : ""
+        }`}
       />
       <Image ref={rockRef1}
         src={rock1}
@@ -113,12 +112,15 @@ const Hero = () => {
         alt="Rock 2"
         className="absolute bottom-0 right-0 w-[10%]"
       />
-      <div
-        ref={textRef}
-        className="absolute top-[70%] left-[41%] text-center text-black text-[0.4rem] opacity-0  transform -translate-x-1/2 -translate-y-1/2">
-        <p className="text-[5em] tracking-[10px]">AMORR</p>
-        <p className="text-[0.5em]">Challenges Engage Efforts Futre</p>
-      </div>
+       <div
+   
+      className={`absolute top-[70%] left-[50%] text-center text-black text-[0.4rem] opacity-0 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-[2500ms] ease-out ${
+        animate ? "top-[35%] left-[50%] text-[2.5vw] opacity-100" : ""
+      }`}
+    >
+      <p className="text-[5em] tracking-[10px]">AMORR</p>
+      <p className="text-[0.5em]">Challenges Engage Efforts Future</p>
+    </div>
     </div>
   );
 };
