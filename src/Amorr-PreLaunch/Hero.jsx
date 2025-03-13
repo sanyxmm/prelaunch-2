@@ -1,19 +1,17 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import rightT from './assets/tree 1 1.png';
 import leftT from './assets/TREE 2 1.png';
 import rock2 from './assets/ROCK 1 1.png';
 import rock1 from './assets/ROCK 2 1.png';
 import couple from './assets/couple & shadow 1.png';
-import Image from 'next/image'
-
-const height = window.innerHeight;
-const width = window.innerWidth;
-
+import Image from 'next/image';
 
 const Hero = () => {
-  console.log(height);
+  const [height, setHeight] = useState(0);
+  const [width, setWidth] = useState(0);
+
   const leftTRef = useRef(null);
   const rightTRef = useRef(null);
   const coupleRef = useRef(null);
@@ -23,11 +21,22 @@ const Hero = () => {
   const mm = gsap.matchMedia();
 
   useEffect(() => {
+    // Access window safely inside useEffect
+    if (typeof window !== "undefined") {
+      setHeight(window.innerHeight);
+      setWidth(window.innerWidth);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (height === 0) return; // Wait until height is set
+
     gsap.to(leftTRef.current, {
       x: 40,
       y: 0,
       duration: 2
     });
+
     gsap.to(rightTRef.current, {
       x: 0,
       y: 0,
@@ -35,50 +44,53 @@ const Hero = () => {
       height: "116vh",
       width: "35%"
     });
+
     gsap.to(textRef.current, {
-      top: "37%",  // Move to vertical center
+      top: "37%", // Move to vertical center
       left: "50%", // Move to horizontal center
       duration: 2,
       fontSize: "2.5vw",
       opacity: 1,
       ease: "power2.out"
     });
+
     mm.add("(min-width: 1300px)", () => {
-      // Animations or behaviors for screens 769px wide and above
       gsap.to(coupleRef.current, {
         x: 0,
-        y: -(height/5.8),
+        y: -(height / 5.8),
         duration: 2,
         width: "20vw",
         ease: "power2.out"
       });
     });
+
     mm.add("(max-width: 1300px)", () => {
-      // Animations or behaviors for screens 769px wide and above
       gsap.to(coupleRef.current, {
         x: 0,
-        y: -(height/8),
+        y: -(height / 8),
         duration: 2,
         width: "20vw",
         ease: "power2.out"
       });
     });
+
     gsap.to(rockRef1.current, {
       width: "20%",
       duration: 2,
     });
+
     gsap.to(rockRef2.current, {
       width: "13%",
       duration: 2,
     });
-    
-  }, []);
+
+  }, [height, mm]);
 
   return (
     <div style={{ backgroundSize: "100% 100%" }} className='bg-couple bg-cover bg-no-repeat bg-center h-[100vh] w-full'>
       {/* Add absolute images */}
-      <Image ref={leftTRef} 
-      src={leftT} alt="Left Tree"
+      <Image ref={leftTRef}
+        src={leftT} alt="Left Tree"
         className="absolute top-0 left-[-2.8rem] w-[35%] h-[100vh]"
       />
       <Image ref={rightTRef}
@@ -111,4 +123,4 @@ const Hero = () => {
   );
 };
 
-export default Hero
+export default Hero;
