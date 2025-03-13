@@ -118,8 +118,8 @@ const Hero = () => {
         className="absolute bottom-0 right-0 w-[10%]"
       />
        <div
-      className={`absolute bottom-[30%] left-[50%] text-center text-black text-[0.4rem] transform -translate-x-1/2 -translate-y-0 transition-all duration-[2500ms] ease-out ${
-        animate2 ? "bottom-[40%] left-[50%] text-[2.5vw] " : ""
+      className={`absolute bottom-[30%] left-[50%] text-center text-black text-[0.4rem] opacity-0 transform -translate-x-1/2 -translate-y-0 transition-all duration-[2500ms] ease-out ${
+        animate2 ? "bottom-[40%] left-[50%] text-[2.5vw] opacity-100" : ""
       }`}
     >
       <p className="text-[5em] tracking-[10px]">AMORR</p>
