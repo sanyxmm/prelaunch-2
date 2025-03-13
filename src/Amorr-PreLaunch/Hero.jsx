@@ -19,11 +19,16 @@ const Hero = () => {
   const rockRef1 = useRef(null);
   const rockRef2 = useRef(null);
   const mm = gsap.matchMedia();
-  const [animate, setAnimate] = useState(false);
+  const [animate1, setAnimate1] = useState(false);
+  const [animate2, setAnimate2] = useState(false);
 
   useEffect(() => {
-    const timeout = setTimeout(() => setAnimate(true), 100); // Small delay to trigger animation
-    return () => clearTimeout(timeout);
+    const timeout1 = setTimeout(() => setAnimate1(true), 100); // Small delay to trigger animation
+    const timeout2 = setTimeout(() => setAnimate2(true), 100);
+    return () => {
+      clearTimeout(timeout1);
+      clearTimeout(timeout2)
+    };
   }, []);
 
   useEffect(() => {
@@ -99,7 +104,7 @@ const Hero = () => {
         src={couple}
         alt="Couple"
         className={`absolute bottom-[-10vw] left-[40%] w-[18vw] z-10 transform  -translate-y-0  transition-all duration-[2500ms]  ease-out ${
-          animate ? "bottom-[0%] left-[40%] w-[20vw] " : ""
+          animate1 ? "bottom-[0%] left-[40%] w-[20vw] " : ""
         }`}
       />
       <Image ref={rockRef1}
@@ -113,9 +118,8 @@ const Hero = () => {
         className="absolute bottom-0 right-0 w-[10%]"
       />
        <div
-   
       className={`absolute top-[70%] left-[50%] text-center text-black text-[0.4rem] opacity-0 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-[2500ms] ease-out ${
-        animate ? "top-[35%] left-[50%] text-[2.5vw] opacity-100" : ""
+        animate2 ? "top-[35%] left-[50%] text-[2.5vw] opacity-100" : ""
       }`}
     >
       <p className="text-[5em] tracking-[10px]">AMORR</p>
