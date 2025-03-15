@@ -10,9 +10,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="overflow-x-hidden">
-    <div className="hidden md:hidden fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 text-white text-2xl font-bold">
-  Under Development
-</div>
 
         <Hero/>
         <Together/>
